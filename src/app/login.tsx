@@ -1,8 +1,9 @@
 import { useTheme } from '@/hooks/use-theme';
 import { LinearGradient } from 'expo-linear-gradient';
+import { router } from 'expo-router';
+import { useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 // TODO(öğrenme - tema): Text/View yerine projede hazır olan ThemedText/ThemedView'i
 // kullanın, dark/light rengi otomatik gelir:
 //   import { ThemedText } from '@/components/themed-text';
@@ -13,7 +14,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // tüm uygulamanın renk kaynağı orası.
 export default function Login() {
     const theme = useTheme();
-    console.log('theme', theme);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.background }}>
             {/* Login Card */}
@@ -33,9 +36,17 @@ export default function Login() {
                         placeholder="Şifre"
                         secureTextEntry={true}>
                     </TextInput>
-                    <Pressable>
+                    <Pressable
+                        onPress={() => {
+                            // TODO(öğrenme - kontrol/state): login butonuna basıldığında
+                            // isLogged state'ini true yapacağız ki RootLayout'ta
+                            // (tabs) ekranı gösterilsin. Bunun için useState'i bir
+                            // Context/ctx.ts dosyasına taşıyacağız ki hem burada hem
+                            // RootLayout'ta erişilebilsin.
+                            router.replace('/')
+                        }}>
                         <LinearGradient
-                            colors={['#4c669f', '#3b5998', '#192f6a']}
+                            colors={[theme.primary, theme.secondary]}
                             style={{ padding: 10, alignItems: 'center', borderRadius: 5 }}>
                             <Text style={{ color: 'white' }}>Giriş Yap</Text>
                         </LinearGradient>
