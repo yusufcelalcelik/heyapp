@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useState } from 'react';
 import { useColorScheme } from 'react-native';
@@ -23,22 +23,8 @@ export default function RootLayout() {
   const [isLogged, setIsLogged] = useState(false);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <Stack screenOptions={{ headerShown: false }}>
       <AnimatedSplashOverlay />
-      {/* TODO(öğrenme - Stack.Protected): Aşağıdaki iki Stack.Screen'i, guard prop'u
-          alan Stack.Protected bloklarıyla sarmalayacağız:
-          
-            <Stack.Protected guard={isLoggedIn}>
-              <Stack.Screen name="(tabs)" />
-              <Stack.Screen name="settings" />
-            </Stack.Protected>
-            <Stack.Protected guard={!isLoggedIn}>
-              <Stack.Screen name="login" />
-            </Stack.Protected>
-          guard={false} olan taraf Router için hiç yokmuş gibi davranır, bu yüzden
-          kullanıcı otomatik olarak guard={true} olan tarafa yönlenir. isLoggedIn
-          false olduğu sürece Router'ın gördüğü TEK ekran "login" olacağı için
-          uygulama açılışta direkt login'e düşer. */}
       <Stack.Protected guard={isLogged}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="settings" />
@@ -46,6 +32,7 @@ export default function RootLayout() {
       <Stack.Protected guard={!isLogged}>
         <Stack.Screen name="login" />
       </Stack.Protected>
-    </ThemeProvider>
+    </Stack>
   );
+
 }
