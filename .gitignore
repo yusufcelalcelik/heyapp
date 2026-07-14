@@ -41,3 +41,13 @@ example
 # generated native folders
 /ios
 /android
+
+# Build artifacts
+*.apk
+*.aab
+*.ipa
+*.app
+build-*.aab
+build-*.apk
+/build
+AGENTS.md
