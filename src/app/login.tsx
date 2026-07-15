@@ -1,3 +1,4 @@
+import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/hooks/use-theme';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
@@ -14,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // tüm uygulamanın renk kaynağı orası.
 export default function Login() {
     const theme = useTheme();
+    const { setIsLogged } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -43,6 +45,7 @@ export default function Login() {
                             // (tabs) ekranı gösterilsin. Bunun için useState'i bir
                             // Context/ctx.ts dosyasına taşıyacağız ki hem burada hem
                             // RootLayout'ta erişilebilsin.
+                            setIsLogged(true)
                             router.replace('/')
                         }}>
                         <LinearGradient
