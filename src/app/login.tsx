@@ -3,7 +3,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 // TODO(öğrenme - tema): Text/View yerine projede hazır olan ThemedText/ThemedView'i
 // kullanın, dark/light rengi otomatik gelir:
@@ -16,6 +16,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Login() {
     const theme = useTheme();
     const { setIsLogged } = useAuth();
+    const handleLogin = () => {
+        if (username == '' || password == '') return Alert.alert("Uyarı", "Alanları doldurmadınız")
+        setIsLogged(true);
+        router.replace('/')
+    }
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -31,23 +36,19 @@ export default function Login() {
                 <View>
                     <TextInput
                         style={{ color: theme.text }}
-                        placeholder="Kullanıcı Adı">
+                        placeholder="Kullanıcı Adı"
+                        onChangeText={setUsername}
+                    >
                     </TextInput>
                     <TextInput
                         style={{ color: theme.text }}
                         placeholder="Şifre"
-                        secureTextEntry={true}>
+                        secureTextEntry={true}
+                        onChangeText={setPassword}
+                    >
                     </TextInput>
                     <Pressable
-                        onPress={() => {
-                            // TODO(öğrenme - kontrol/state): login butonuna basıldığında
-                            // isLogged state'ini true yapacağız ki RootLayout'ta
-                            // (tabs) ekranı gösterilsin. Bunun için useState'i bir
-                            // Context/ctx.ts dosyasına taşıyacağız ki hem burada hem
-                            // RootLayout'ta erişilebilsin.
-                            setIsLogged(true)
-                            router.replace('/')
-                        }}>
+                        onPress={() => handleLogin()}>
                         <LinearGradient
                             colors={[theme.primary, theme.secondary]}
                             style={{ padding: 10, alignItems: 'center', borderRadius: 5 }}>
