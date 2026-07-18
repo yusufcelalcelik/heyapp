@@ -1,12 +1,12 @@
 import { login } from '@/api/api';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/hooks/use-theme';
+import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 // TODO(öğrenme - tema): Text/View yerine projede hazır olan ThemedText/ThemedView'i
 // kullanın, dark/light rengi otomatik gelir:
 //   import { ThemedText } from '@/components/themed-text';
@@ -20,13 +20,14 @@ export default function Login() {
     const { setIsLogged } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async () => {
         if (username == '' || password == '') return Alert.alert("Uyarı", "Alanları doldurmadınız")
         try {
             //Buraya login api  fonksiyonu gelecek
             const response = await login(username, password)
-            console.log(response)
+            // console.log(response)
             setIsLogged(true);
             router.replace('/')
         } catch (error) {
@@ -49,15 +50,23 @@ export default function Login() {
                         style={{ color: theme.text }}
                         placeholder="Kullanıcı Adı"
                         onChangeText={setUsername}
+                        autoCapitalize='none'
                     >
                     </TextInput>
                     <TextInput
                         style={{ color: theme.text }}
                         placeholder="Şifre"
-                        secureTextEntry={true}
+                        secureTextEntry={!showPassword}
                         onChangeText={setPassword}
+                        autoCapitalize='none'
+                        autoCorrect={false}
                     >
                     </TextInput>
+                    <Pressable onPress={() => setShowPassword(!showPassword)}>
+                        <Text>{showPassword ? "Gizle" : "Göster"}</Text>
+                        <Ionicons name={showPassword ? "eye-off" : "eye"} size={20} color={theme.text} />
+                    </Pressable>
+
                     <Pressable
                         onPress={() => handleLogin()}>
                         <LinearGradient
