@@ -23,12 +23,17 @@ export default function Login() {
 
     const handleLogin = async () => {
         if (username == '' || password == '') return Alert.alert("Uyarı", "Alanları doldurmadınız")
+        try {
+            //Buraya login api  fonksiyonu gelecek
+            const response = await login(username, password)
+            console.log(response)
+            setIsLogged(true);
+            router.replace('/')
+        } catch (error) {
+            console.log("HATA:", error)
+            Alert.alert("Hata", "Giriş başarısız, kullanıcı adı veya şifre hatalı")
+        }
 
-        //Buraya login api  fonksiyonu gelecek
-        const response = await login(username, password)
-        console.log(response)
-        setIsLogged(true);
-        router.replace('/')
     }
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.background }}>
