@@ -44,8 +44,8 @@ export default function Login() {
             <View style={styles.card}>
 
                 <View style={styles.header}>
-                    <Text style={{ color: theme.text }}>Hoşgeldiniz</Text>
-                    <Text style={{ color: theme.textSecondary }}>Hesabınıza Giriş Yapın</Text>
+                    <Text style={[styles.title, { color: theme.text }]}>Hoşgeldiniz</Text>
+                    <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Hesabınıza Giriş Yapın</Text>
                 </View>
                 <View style={styles.form}>
                     <TextInput
@@ -69,7 +69,10 @@ export default function Login() {
                         </Pressable>
                     </View>
                     <Pressable
-                        style={styles.loginButton}
+                        style={({ pressed, hovered }) => [
+                            styles.loginButton,
+                            (pressed || hovered) && { opacity: 0.85 },
+                        ]}
                         onPress={() => handleLogin()}>
                         <LinearGradient
                             colors={[theme.primary, theme.secondary]}
@@ -98,6 +101,13 @@ const styles = StyleSheet.create({
     },
     header: {
         gap: Spacing.one,
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: '700',
+    },
+    subtitle: {
+        fontSize: 15,
     },
     form: {
         gap: Spacing.three,
