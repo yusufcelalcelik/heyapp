@@ -1,11 +1,12 @@
 import { login } from '@/api/api';
+import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/hooks/use-theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, Pressable, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 // TODO(öğrenme - tema): Text/View yerine projede hazır olan ThemedText/ThemedView'i
 // kullanın, dark/light rengi otomatik gelir:
@@ -37,42 +38,43 @@ export default function Login() {
 
     }
     return (
-        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.background }}>
+        <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
             {/* Login Card */}
 
-            <View >
-                <View>
+            <View style={styles.card}>
+
+                <View style={styles.header}>
                     <Text style={{ color: theme.text }}>Hoşgeldiniz</Text>
                     <Text style={{ color: theme.textSecondary }}>Hesabınıza Giriş Yapın</Text>
                 </View>
-                <View>
+                <View style={styles.form}>
                     <TextInput
-                        style={{ color: theme.text }}
+                        style={[styles.input, { color: theme.text, backgroundColor: theme.backgroundElement }]}
                         placeholder="Kullanıcı Adı"
                         onChangeText={setUsername}
                         autoCapitalize='none'
                     >
                     </TextInput>
-                    <TextInput
-                        style={{ color: theme.text }}
-                        placeholder="Şifre"
-                        secureTextEntry={!showPassword}
-                        onChangeText={setPassword}
-                        autoCapitalize='none'
-                        autoCorrect={false}
-                    >
-                    </TextInput>
-                    <Pressable onPress={() => setShowPassword(!showPassword)}>
-                        <Text>{showPassword ? "Gizle" : "Göster"}</Text>
-                        <Ionicons name={showPassword ? "eye-off" : "eye"} size={20} color={theme.text} />
-                    </Pressable>
-
+                    <View style={styles.passwordWrapper}>
+                        <TextInput
+                            style={[styles.input, styles.passwordInput, { color: theme.text, backgroundColor: theme.backgroundElement }]}
+                            placeholder="Şifre"
+                            secureTextEntry={!showPassword}
+                            onChangeText={setPassword}
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                        />
+                        <Pressable style={styles.showPasswordButton} onPress={() => setShowPassword(!showPassword)}>
+                            <Ionicons name={showPassword ? "eye-off" : "eye"} size={20} color={theme.text} />
+                        </Pressable>
+                    </View>
                     <Pressable
+                        style={styles.loginButton}
                         onPress={() => handleLogin()}>
                         <LinearGradient
                             colors={[theme.primary, theme.secondary]}
-                            style={{ padding: 10, alignItems: 'center', borderRadius: 5 }}>
-                            <Text style={{ color: 'white' }}>Giriş Yap</Text>
+                            style={styles.loginButtonGradient}>
+                            <Text style={styles.loginButtonText}>Giriş Yap</Text>
                         </LinearGradient>
                     </Pressable>
 
@@ -82,3 +84,49 @@ export default function Login() {
     )
 
 }
+
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    card: {
+        width: '100%',
+        paddingHorizontal: Spacing.four,
+        gap: Spacing.four,
+    },
+    header: {
+        gap: Spacing.one,
+    },
+    form: {
+        gap: Spacing.three,
+    },
+    input: {
+        padding: Spacing.three,
+        borderRadius: 10,
+    },
+    passwordWrapper: {
+        position: 'relative',
+        justifyContent: 'center',
+    },
+    showPasswordButton: {
+        position: 'absolute',
+        right: Spacing.three,
+    },
+    passwordInput: {
+        paddingRight: 44, // ikon + boşluk için yer aç
+    },
+    loginButton: {
+        width: '100%',
+    },
+    loginButtonGradient: {
+        padding: Spacing.three,
+        alignItems: 'center',
+        borderRadius: 12,
+    },
+    loginButtonText: {
+        color: 'white',
+        fontWeight: '600',
+    },
+});
