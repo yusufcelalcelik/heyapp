@@ -51,3 +51,4 @@ build-*.aab
 build-*.apk
 /build
 AGENTS.md
+.env
