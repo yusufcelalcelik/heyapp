@@ -1,3 +1,4 @@
+import { login } from '@/api/api';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/hooks/use-theme';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -5,6 +6,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 // TODO(öğrenme - tema): Text/View yerine projede hazır olan ThemedText/ThemedView'i
 // kullanın, dark/light rengi otomatik gelir:
 //   import { ThemedText } from '@/components/themed-text';
@@ -16,14 +18,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Login() {
     const theme = useTheme();
     const { setIsLogged } = useAuth();
-    const handleLogin = () => {
-        if (username == '' || password == '') return Alert.alert("Uyarı", "Alanları doldurmadınız")
-        setIsLogged(true);
-        router.replace('/')
-    }
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleLogin = async () => {
+        if (username == '' || password == '') return Alert.alert("Uyarı", "Alanları doldurmadınız")
+
+        //Buraya login api  fonksiyonu gelecek
+        const response = await login(username, password)
+        console.log(response)
+        setIsLogged(true);
+        router.replace('/')
+    }
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.background }}>
             {/* Login Card */}
