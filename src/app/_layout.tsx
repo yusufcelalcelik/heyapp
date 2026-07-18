@@ -19,15 +19,17 @@ function RootNavigator() {
   const { isLogged } = useAuth();   // artık AuthProvider'ın İÇİNDE, sorun yok
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Protected guard={isLogged}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="settings" />
+        </Stack.Protected>
+        <Stack.Protected guard={!isLogged}>
+          <Stack.Screen name="login" />
+        </Stack.Protected>
+      </Stack>
       <AnimatedSplashOverlay />
-      <Stack.Protected guard={isLogged}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="settings" />
-      </Stack.Protected>
-      <Stack.Protected guard={!isLogged}>
-        <Stack.Screen name="login" />
-      </Stack.Protected>
-    </Stack>
+    </>
   );
 }

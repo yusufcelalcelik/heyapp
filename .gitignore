@@ -50,5 +50,19 @@ example
 build-*.aab
 build-*.apk
 /build
+
+# Archives
+*.tar.gz
+*.tgz
+*.zip
+
+# Hassas servis/credential dosyaları
+google-services.json
+GoogleService-Info.plist
+credentials.json
+serviceAccountKey.json
+*serviceAccountKey.json
+*.keystore
+
 AGENTS.md
 .env
