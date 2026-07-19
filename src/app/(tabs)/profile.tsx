@@ -4,9 +4,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Header } from '@/components/Header';
 
 const PROFILE = {
-    username: 'yusufcelal',
+    username: 'yusufcelalcelik',
     fullName: 'Yusuf Celal Çelik',
     bio: 'React Native öğreniyorum 🚀',
     avatar: 'https://picsum.photos/200',
@@ -27,7 +28,7 @@ export default function ProfileScreen() {
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
             {/* buraya devam edeceğiz */}
             {/* buraya header bileşeni eklenecek */}
-
+            <Header title={PROFILE.username} showSettings />
 
             {/* Burası  poprfil header */}
 
