@@ -31,7 +31,7 @@ export default function ProfileScreen() {
 
             {/* Burası  poprfil header */}
 
-            <View>
+            <View style={styles.profileHeader}>
                 {/* Porfil İconu */}
 
                 <View>
@@ -42,35 +42,73 @@ export default function ProfileScreen() {
 
                 </View>
                 {/* Burası  takipçi sayısı fln ç*/}
-                <View>
-                    {/* Post sayısı */}
+                <View style={styles.statsColumn}>
+                    <Text style={styles.fullName}>{PROFILE.fullName}</Text>
 
-                    <View>
-                        <Text>Post</Text>
-                        <Text>{PROFILE.postsCount}</Text>
-                    </View>
-                    {/* Takipçi sayısı */}
+                    <View style={styles.statsRow}>
+                        {/* Post sayısı */}
 
-                    <View>
-                        <Text>Takipçi</Text>
+                        <View style={styles.statItem}>
+                            <Text>Post</Text>
+                            <Text>{PROFILE.postsCount}</Text>
+                        </View>
+                        {/* Takipçi sayısı */}
 
-                        <Text> {PROFILE.followers}</Text>
-                    </View>
-                    {/* Takip ettikleri sayısı */}
+                        <View style={styles.statItem}>
 
-                    <View>
-                        <Text>Takip</Text>
+                            <Text>Takipçi</Text>
 
-                        <Text>  {PROFILE.following}</Text>
+                            <Text> {PROFILE.followers}</Text>
+                        </View>
+                        {/* Takip ettikleri sayısı */}
+                        <View style={styles.statItem}>
+
+                            <Text>Takip</Text>
+
+                            <Text>  {PROFILE.following}</Text>
+                        </View>
                     </View>
                 </View>
+            </View>
 
-                {/* Biografi*/}
-                <View>
-                    <Text> {PROFILE.bio}</Text>
-                </View>
+            {/* Biografi*/}
+            <View style={styles.bioContainer}>
+                <Text>{PROFILE.bio}</Text>
             </View>
         </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    profileHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: Spacing.four,
+        paddingHorizontal: Spacing.four,
+    },
+    fullName: {
+        fontWeight: '700',
+        marginBottom: 10,
+    },
+    statsColumn: {
+        flex: 1,   // eskiden statsRow'daki flex:1'i buraya taşı
+        gap: Spacing.one,
+    },
+    statsRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        // flex: 1 artık burada değil, statsColumn'a taşındı
+    },
+
+    statItem: {
+        alignItems: 'center',
+    },
+    bioContainer: {
+        paddingHorizontal: Spacing.four,
+        marginTop: Spacing.three,
+        gap: Spacing.half,
+    },
+
+});
+
 
