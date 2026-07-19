@@ -14,7 +14,13 @@ export function Header({ title, showNotifications = false, showSettings = false,
 
     return (
         <View style={styles.container}>
-            <View style={styles.side} />
+            <View style={styles.side}>
+                {showAddButton && (
+                    <Pressable>
+                        <Ionicons name="add-circle-outline" size={24} color={theme.text} />
+                    </Pressable>
+                )}
+            </View>
 
             <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
 
@@ -22,11 +28,6 @@ export function Header({ title, showNotifications = false, showSettings = false,
                 {showNotifications && (
                     <Pressable>
                         <Ionicons name="notifications-outline" size={24} color={theme.text} />
-                    </Pressable>
-                )}
-                {showAddButton && (
-                    <Pressable>
-                        <Ionicons name="add-circle-outline" size={24} color={theme.text} />
                     </Pressable>
                 )}
                 {showSettings && (
