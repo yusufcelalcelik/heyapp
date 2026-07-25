@@ -5,11 +5,12 @@ import { Image } from 'expo-image';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '@/components/Header';
+import { useAuth } from '@/context/AuthContext';
 
 const PROFILE = {
-    username: 'yusufcelalcelik',
-    fullName: 'Yusuf Celal Çelik',
-    bio: 'React Native öğreniyorum 🚀',
+    username: 'aa',
+    fullName: 'Yusuf aaaaa Çelik',
+    bio: 'React aaaaaaaa öğreniyorum 🚀',
     avatar: 'https://picsum.photos/200',
     postsCount: 12,
     followers: 340,
@@ -23,12 +24,12 @@ const PHOTOS = Array.from({ length: 12 }, (_, i) => ({
 
 export default function ProfileScreen() {
     const theme = useTheme();
-
+    const { user } = useAuth()
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
             {/* buraya devam edeceğiz */}
             {/* buraya header bileşeni eklenecek */}
-            <Header title={PROFILE.username} showSettings />
+            <Header title={user?.username} showSettings />
 
             {/* Burası  poprfil header */}
 
@@ -44,14 +45,14 @@ export default function ProfileScreen() {
                 </View>
                 {/* Burası  takipçi sayısı fln ç*/}
                 <View style={styles.statsColumn}>
-                    <Text style={styles.fullName}>{PROFILE.fullName}</Text>
+                    <Text style={styles.fullName}>{user?.name}</Text>
 
                     <View style={styles.statsRow}>
                         {/* Post sayısı */}
 
                         <View style={styles.statItem}>
                             <Text>Post</Text>
-                            <Text>{PROFILE.postsCount}</Text>
+                            <Text>{user.post}</Text>
                         </View>
                         {/* Takipçi sayısı */}
 
@@ -59,14 +60,14 @@ export default function ProfileScreen() {
 
                             <Text>Takipçi</Text>
 
-                            <Text> {PROFILE.followers}</Text>
+                            <Text> {user.follower}</Text>
                         </View>
                         {/* Takip ettikleri sayısı */}
                         <View style={styles.statItem}>
 
                             <Text>Takip</Text>
 
-                            <Text>  {PROFILE.following}</Text>
+                            <Text>  {user.follow}</Text>
                         </View>
                     </View>
                 </View>
@@ -74,7 +75,7 @@ export default function ProfileScreen() {
 
             {/* Biografi*/}
             <View style={styles.bioContainer}>
-                <Text>{PROFILE.bio}</Text>
+                <Text>{user.bio}</Text>
             </View>
         </SafeAreaView>
     );
