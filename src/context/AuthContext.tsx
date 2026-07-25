@@ -11,6 +11,10 @@ type UserData = {
     uuid: string;
     name: string;
     username: string;
+    post: number;
+    follow: number;
+    follower: number;
+    bio: string;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);

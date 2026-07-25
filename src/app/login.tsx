@@ -29,7 +29,7 @@ export default function Login() {
         try {
             //Buraya login api  fonksiyonu gelecek
             const response = await login(username, password)
-            setUser({ uuid: response.uuid, name: response.name, username })
+            setUser({ uuid: response.uuid, name: response.name, username, post: response.post, follow: response.follow, follower: response.follower })
             setIsLogged(true);
             router.replace('/')
 
