@@ -18,7 +18,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // tüm uygulamanın renk kaynağı orası.
 export default function Login() {
     const theme = useTheme();
-    const { setIsLogged } = useAuth();
+    const { setIsLogged, setUser } = useAuth();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -28,9 +29,10 @@ export default function Login() {
         try {
             //Buraya login api  fonksiyonu gelecek
             const response = await login(username, password)
-            // console.log(response)
+            setUser({ uuid: response.uuid, name: response.name, username })
             setIsLogged(true);
             router.replace('/')
+
         } catch (error) {
             console.log("HATA:", error)
             Alert.alert("Hata", "Giriş başarısız, kullanıcı adı veya şifre hatalı")

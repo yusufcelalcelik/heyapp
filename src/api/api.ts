@@ -14,5 +14,5 @@ export const login = async (username: string, password: string) => {
         throw new Error("Giriş başarısız"+ " " +response);
     }
     // Başarılıysa bilgileri fırlatır
-    return response
+    return await response.json()
 }
