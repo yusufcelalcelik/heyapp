@@ -8,14 +8,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// TODO(öğrenme - tema): Text/View yerine projede hazır olan ThemedText/ThemedView'i
-// kullanın, dark/light rengi otomatik gelir:
-//   import { ThemedText } from '@/components/themed-text';
-//   import { ThemedView } from '@/components/themed-view';
-// Sonra <View> -> <ThemedView>, <Text> -> <ThemedText> yapın (aynı şekilde
-// kullanılıyor, ekstra prop zorunlu değil). Renkleri değiştirmek isterseniz
-// src/constants/theme.ts içindeki Colors.light / Colors.dark objesine bakın -
-// tüm uygulamanın renk kaynağı orası.
+
 export default function Login() {
     const theme = useTheme();
     const { setIsLogged, setUser } = useAuth();
@@ -29,7 +22,16 @@ export default function Login() {
         try {
             //Buraya login api  fonksiyonu gelecek
             const response = await login(username, password)
-            setUser({ uuid: response.uuid, name: response.name, username, post: response.post, follow: response.follow, follower: response.follower })
+            setUser({
+                uuid: response.uuid,
+                name: response.name,
+                username,
+                post: response.post,
+                follow: response.follow,
+                follower: response.follower,
+                bio: response.bio
+            })
+
             setIsLogged(true);
             router.replace('/')
 

@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Spacing } from '@/constants/theme';
 
 type HeaderProps = {
-    title: string;
+    title?: string;
     showNotifications?: boolean;
     showSettings?: boolean;
     showAddButton?: boolean;

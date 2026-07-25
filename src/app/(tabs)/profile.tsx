@@ -8,13 +8,7 @@ import { Header } from '@/components/Header';
 import { useAuth } from '@/context/AuthContext';
 
 const PROFILE = {
-    username: 'aa',
-    fullName: 'Yusuf aaaaa Çelik',
-    bio: 'React aaaaaaaa öğreniyorum 🚀',
     avatar: 'https://picsum.photos/200',
-    postsCount: 12,
-    followers: 340,
-    following: 180,
 };
 
 const PHOTOS = Array.from({ length: 12 }, (_, i) => ({
@@ -52,7 +46,7 @@ export default function ProfileScreen() {
 
                         <View style={styles.statItem}>
                             <Text>Post</Text>
-                            <Text>{user.post}</Text>
+                            <Text>{user?.post}</Text>
                         </View>
                         {/* Takipçi sayısı */}
 
@@ -60,14 +54,14 @@ export default function ProfileScreen() {
 
                             <Text>Takipçi</Text>
 
-                            <Text> {user.follower}</Text>
+                            <Text> {user?.follower}</Text>
                         </View>
                         {/* Takip ettikleri sayısı */}
                         <View style={styles.statItem}>
 
                             <Text>Takip</Text>
 
-                            <Text>  {user.follow}</Text>
+                            <Text>  {user?.follow}</Text>
                         </View>
                     </View>
                 </View>
@@ -75,7 +69,7 @@ export default function ProfileScreen() {
 
             {/* Biografi*/}
             <View style={styles.bioContainer}>
-                <Text>{user.bio}</Text>
+                <Text>{user?.bio}</Text>
             </View>
         </SafeAreaView>
     );
