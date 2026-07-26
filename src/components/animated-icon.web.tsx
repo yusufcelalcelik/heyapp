@@ -5,6 +5,7 @@ import Animated, { Keyframe, Easing } from 'react-native-reanimated';
 import classes from './animated-icon.module.css';
 const DURATION = 300;
 
+// Native splash screen kavramı web'de yok, bu yüzden web derlemesinde bu bileşen hiçbir şey render etmiyor.
 export function AnimatedSplashOverlay() {
   return null;
 }
@@ -54,6 +55,11 @@ const glowKeyframe = new Keyframe({
   },
 });
 
+/**
+ * animated-icon.tsx'teki AnimatedIcon'un web karşılığı.
+ * Aynı görsel efekti (dönen glow + beliren logo) web'de CSS module (animated-icon.module.css) ile sağlıyor,
+ * çünkü react-native-reanimated'ın bazı native efektleri web'de aynı şekilde çalışmıyor.
+ */
 export function AnimatedIcon() {
   return (
     <View style={styles.iconContainer}>

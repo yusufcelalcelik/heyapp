@@ -6,9 +6,13 @@ import { ThemedText } from "@/components/themed-text";
 import { Ionicons } from '@expo/vector-icons';
 import { Spacing } from '@/constants/theme';
 
+/**
+ * Ayarlar sayfası. Şimdilik sadece çıkış yap butonunu içeriyor.
+ */
 export default function Settings() {
     const { logout } = useAuth();
 
+    // Kazara basılıp oturumun kapanmaması için önce onay isteniyor (destructive stil = kırmızı "Çıkış" butonu).
     const handleLogout = () => {
         Alert.alert(
         "Çıkış Yap",
@@ -45,6 +49,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    // Kırmızı renk (#FF3B30) tema rengine göre değil sabit tutuluyor:
+    // "tehlikeli/geri dönüşü olmayan aksiyon" anlamı açık/koyu temada da aynı kalmalı.
     logoutButton: {
         flexDirection: 'row',
         alignItems: 'center',

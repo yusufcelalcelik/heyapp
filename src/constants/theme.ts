@@ -30,6 +30,8 @@ export const Colors = {
   },
 } as const;
 
+// ThemedView/ThemedText'in "type"/"themeColor" prop'larında kabul edilen renk isimleri.
+// Colors.light ile Colors.dark aynı key'lere sahip olmak zorunda, bu yüzden ikisinin kesişimi alınıyor.
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
 export const Fonts = Platform.select({
@@ -57,6 +59,9 @@ export const Fonts = Platform.select({
   },
 });
 
+// Proje genelinde kullanılan boşluk (padding/margin/gap) birimleri.
+// Rastgele sayı yazmak yerine (paddingHorizontal: 17 gibi) buradaki isimli değerler kullanılıyor,
+// böylece tüm ekranlarda tutarlı bir boşluk sistemi olur.
 export const Spacing = {
   half: 2,
   one: 4,

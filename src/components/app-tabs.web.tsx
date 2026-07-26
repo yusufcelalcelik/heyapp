@@ -15,6 +15,11 @@ import { ThemedView } from './themed-view';
 
 import { Colors, MaxContentWidth, Spacing } from '@/constants/theme';
 
+/**
+ * Web için alt sekme çubuğu. Native tarafta app-tabs.tsx içindeki NativeTabs kullanılıyor,
+ * çünkü NativeTabs web'de çalışmıyor; burada expo-router/ui'nin platform bağımsız
+ * Tabs/TabList/TabTrigger yapıtaşları ile aynı davranış manuel olarak kuruluyor.
+ */
 export default function AppTabs() {
   return (
     <Tabs>
@@ -30,6 +35,7 @@ export default function AppTabs() {
   );
 }
 
+// Tek bir sekme butonu: seçili olup olmamasına göre arka plan/yazı rengi değişir (ThemedView/ThemedText üzerinden).
 export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
   return (
     <Pressable {...props} style={({ pressed }) => pressed && styles.pressed}>
@@ -44,6 +50,7 @@ export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps
   );
 }
 
+// Sekmelerin dışını saran kapsül görünümlü konteyner; marka adı ve dış link burada gösteriliyor.
 export function CustomTabList(props: TabListProps) {
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];

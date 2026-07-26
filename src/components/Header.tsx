@@ -13,6 +13,14 @@ type HeaderProps = {
     showSettings?: boolean;
     showAddButton?: boolean;
 };
+
+/**
+ * Sayfa üstünde kullanılan ortak başlık bileşeni.
+ * Hangi ikonların görüneceği (geri, bildirim, ayarlar, ekle) prop'larla kontrol edilir.
+ *
+ * Ortalanma mantığı: sol ikon grubu, title ve sağ ikon grubu eşit `flex: 1` alıyor.
+ * Böylece herhangi bir tarafta ikon olsun ya da olmasın, title her zaman tam ortada kalıyor.
+ */
 export function Header({ title, showBack = false, showNotifications = false, showSettings = false, showAddButton = false }: HeaderProps) {
     const theme = useTheme();
 
@@ -31,6 +39,7 @@ export function Header({ title, showBack = false, showNotifications = false, sho
                 )}
             </View>
 
+            {/* Uzun başlıklar (örn. kullanıcı adı) tek satırda kalıp gerekirse "..." ile kesilsin diye numberOfLines kullanılıyor. */}
             <ThemedText style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</ThemedText>
 
             <View style={[styles.side, styles.sideRight]}>
@@ -40,6 +49,7 @@ export function Header({ title, showBack = false, showNotifications = false, sho
                     </Pressable>
                 )}
                 {showSettings && (
+                    // push kullanılıyor: replace olsaydı geçmiş ekran silinir, settings'teki geri butonu çalışmazdı.
                     <Pressable onPress={() => router.push("/settings")}>
                         <Ionicons name="settings-outline" size={24} color={theme.text} />
                     </Pressable>

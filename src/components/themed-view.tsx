@@ -9,6 +9,12 @@ export type ThemedViewProps = ViewProps & {
   type?: ThemeColor;
 };
 
+/**
+ * Arka plan rengini aktif temaya (açık/koyu) göre otomatik ayarlayan View.
+ * `type` prop'u ile constants/theme.ts'teki renklerden biri seçilebilir
+ * (örn. type="backgroundElement"); belirtilmezse "background" kullanılır.
+ * Amaç: her component'te theme.background gibi manuel style yazmaktan kurtulmak.
+ */
 export function ThemedView({ style, lightColor, darkColor, type, ...otherProps }: ThemedViewProps) {
   const theme = useTheme();
 

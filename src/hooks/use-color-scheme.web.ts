@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useColorScheme as useRNColorScheme } from 'react-native';
 
 /**
- * To support static rendering, this value needs to be re-calculated on the client side for web
+ * Web'de static rendering desteklemek için renk şemasının client tarafında yeniden hesaplanması gerekiyor.
+ * Sunucu tarafında (SSR/static export) her zaman 'light' döner; tarayıcıda hydration bitince
+ * (hasHydrated true olunca) gerçek sistem temasına geçilir. Bu sayede sunucu ve client'ın
+ * ilk render çıktısı eşleşir, hydration mismatch hatası oluşmaz.
  */
 export function useColorScheme() {
   const [hasHydrated, setHasHydrated] = useState(false);

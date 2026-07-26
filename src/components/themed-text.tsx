@@ -8,6 +8,12 @@ export type ThemedTextProps = TextProps & {
   themeColor?: ThemeColor;
 };
 
+/**
+ * Yazı rengini aktif temaya göre otomatik ayarlayan Text.
+ * `type` prop'u önceden tanımlı font boyutu/kalınlık stillerinden birini uygular (örn. "title", "subtitle").
+ * `themeColor` prop'u ile constants/theme.ts'teki renklerden biri seçilebilir (örn. "textSecondary");
+ * belirtilmezse "text" kullanılır.
+ */
 export function ThemedText({ style, type = 'default', themeColor, ...rest }: ThemedTextProps) {
   const theme = useTheme();
 

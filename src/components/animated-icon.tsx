@@ -8,6 +8,13 @@ import { scheduleOnRN } from 'react-native-worklets';
 const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 90;
 const DURATION = 600;
 
+/**
+ * Uygulama açılışında native splash screen kapandıktan sonra ekranı kaplayan geçiş animasyonu.
+ * İki aşamalı çalışır:
+ * 1) İlk render'da statik logo gösterilir; layout tamamlanınca (onLayout) native SplashScreen.hideAsync() çağrılır.
+ * 2) SplashScreen kapanır kapanmaz `animate` true olur ve logo fade+scale ile kaybolur (splashKeyframe).
+ * Animasyon bitince (withCallback) `visible` false yapılıp bileşen tamamen kaldırılır (return null).
+ */
 export function AnimatedSplashOverlay() {
   const [animate, setAnimate] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -95,6 +102,10 @@ const glowKeyframe = new Keyframe({
   },
 });
 
+/**
+ * Splash overlay'den bağımsız, dekoratif logo animasyonu (dönen glow + büyüyerek beliren logo).
+ * AnimatedSplashOverlay'den farklı olarak açılış akışına bağlı değildir, istenilen yerde kullanılabilir.
+ */
 export function AnimatedIcon() {
   return (
     <View style={styles.iconContainer}>

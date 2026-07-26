@@ -6,15 +6,21 @@ import { useAuth } from '@/context/AuthContext';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 
+// Avatar için gerçek kullanıcı verisi yok, şimdilik sabit bir placeholder görsel kullanılıyor.
 const PROFILE = {
     avatar: 'https://picsum.photos/200',
 };
 
+// TODO: Profilde fotoğraf grid'i (FlatList) eklenince bu placeholder veriler kullanılacak.
 const PHOTOS = Array.from({ length: 12 }, (_, i) => ({
     id: String(i),
     uri: `https://picsum.photos/300?random=${i}`,
 }));
 
+/**
+ * Giriş yapan kullanıcının profil bilgilerini (isim, post/takipçi/takip sayıları, bio) gösterir.
+ * Veriler AuthContext'teki user objesinden geliyor; user null olabileceği için her yerde ?. kullanılıyor.
+ */
 export default function ProfileScreen() {
     const { user } = useAuth()
     return (

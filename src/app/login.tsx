@@ -10,7 +10,13 @@ import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-nativ
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 
+/**
+ * Giriş ekranı. Kullanıcı adı/şifre alıp login API'sini çağırır,
+ * başarılı olursa dönen kullanıcı bilgilerini AuthContext'e kaydeder.
+ */
 export default function Login() {
+    // theme burada TextInput/Ionicons/LinearGradient gibi ThemedView/ThemedText kapsamayan
+    // bileşenlerin rengini manuel ayarlamak için hâlâ gerekli.
     const theme = useTheme();
     const { setIsLogged, setUser } = useAuth();
 
@@ -21,8 +27,9 @@ export default function Login() {
     const handleLogin = async () => {
         if (username == '' || password == '') return Alert.alert("Uyarı", "Alanları doldurmadınız")
         try {
-            //Buraya login api  fonksiyonu gelecek
             const response = await login(username, password)
+            // API'nin döndürdüğü alan adları (özellikle "followers") UserData tipindeki
+            // alan adlarıyla (follower) birebir aynı olmayabiliyor, bu yüzden burada manuel eşliyoruz.
             setUser({
                 uuid: response.uuid,
                 name: response.name,
@@ -34,6 +41,8 @@ export default function Login() {
             })
 
             setIsLogged(true);
+            // isLogged true olduğunda _layout.tsx'teki guard zaten (app) grubuna geçiriyor;
+            // bu replace ek bir güvence, geriye login'e dönülmesini de engelliyor.
             router.replace('/')
 
         } catch (error) {
@@ -44,8 +53,6 @@ export default function Login() {
     }
     return (
         <ThemedView style={styles.safeArea}>
-            {/* Login Card */}
-
             <View style={styles.card}>
 
                 <View style={styles.header}>
@@ -82,6 +89,8 @@ export default function Login() {
                         <LinearGradient
                             colors={[theme.primary, theme.secondary]}
                             style={styles.loginButtonGradient}>
+                            {/* Burada ThemedText değil düz Text kullanılıyor: yazı her zaman beyaz kalmalı,
+                                çünkü arka plan tema rengine göre değil sabit gradient'e göre kontrast sağlıyor. */}
                             <Text style={styles.loginButtonText}>Giriş Yap</Text>
                         </LinearGradient>
                     </Pressable>
