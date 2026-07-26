@@ -7,6 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from '@/components/themed-text';
 
 export default function Login() {
     const theme = useTheme();
@@ -41,14 +43,14 @@ export default function Login() {
 
     }
     return (
-        <View style={[styles.safeArea, { backgroundColor: theme.background }]}>
+        <ThemedView style={styles.safeArea}>
             {/* Login Card */}
 
             <View style={styles.card}>
 
                 <View style={styles.header}>
-                    <Text style={[styles.title, { color: theme.text }]}>Hoşgeldiniz</Text>
-                    <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Hesabınıza Giriş Yapın</Text>
+                    <ThemedText style={styles.title}>Hoşgeldiniz</ThemedText>
+                    <ThemedText style={styles.subtitle} themeColor="textSecondary">Hesabınıza Giriş Yapın</ThemedText>
                 </View>
                 <View style={styles.form}>
                     <TextInput
@@ -86,7 +88,7 @@ export default function Login() {
 
                 </View>
             </View>
-        </View>
+        </ThemedView>
     )
 
 }

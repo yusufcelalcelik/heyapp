@@ -1,10 +1,10 @@
 import { Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
-import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Header } from '@/components/Header';
 import { useAuth } from '@/context/AuthContext';
+import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from '@/components/themed-text';
 
 const PROFILE = {
     avatar: 'https://picsum.photos/200',
@@ -16,65 +16,49 @@ const PHOTOS = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 export default function ProfileScreen() {
-    const theme = useTheme();
     const { user } = useAuth()
     return (
-        <View style={{ flex: 1, backgroundColor: theme.background }}>
-            {/* buraya devam edeceğiz */}
-            {/* buraya header bileşeni eklenecek */}
+        <ThemedView style={styles.container}>
             <Header title={user?.username} showSettings />
 
-            {/* Burası  poprfil header */}
-
             <View style={styles.profileHeader}>
-                {/* Porfil İconu */}
-
                 <View>
                     <Image
                         source={{ uri: PROFILE.avatar }}
                         style={{ width: 80, height: 80, borderRadius: 40 }}
                     />
-
                 </View>
-                {/* Burası  takipçi sayısı fln ç*/}
                 <View style={styles.statsColumn}>
-                    <Text style={styles.fullName}>{user?.name}</Text>
+                    <ThemedText style={styles.fullName}>{user?.name}</ThemedText>
 
                     <View style={styles.statsRow}>
-                        {/* Post sayısı */}
-
                         <View style={styles.statItem}>
-                            <Text>Post</Text>
-                            <Text>{user?.post}</Text>
+                            <ThemedText>Post</ThemedText>
+                            <ThemedText>{user?.post}</ThemedText>
                         </View>
-                        {/* Takipçi sayısı */}
-
                         <View style={styles.statItem}>
-
-                            <Text>Takipçi</Text>
-
-                            <Text> {user?.follower}</Text>
+                            <ThemedText>Takipçi</ThemedText>
+                            <ThemedText> {user?.follower}</ThemedText>
                         </View>
-                        {/* Takip ettikleri sayısı */}
                         <View style={styles.statItem}>
-
-                            <Text>Takip</Text>
-
-                            <Text>  {user?.follow}</Text>
+                            <ThemedText>Takip</ThemedText>
+                            <ThemedText>  {user?.follow}</ThemedText>
                         </View>
                     </View>
                 </View>
             </View>
 
-            {/* Biografi*/}
             <View style={styles.bioContainer}>
-                <Text>{user?.bio}</Text>
+                <ThemedText>{user?.bio}</ThemedText>
             </View>
-        </View>
+        </ThemedView>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     profileHeader: {
         flexDirection: 'row',
         alignItems: 'center',

@@ -31,7 +31,7 @@ export function Header({ title, showBack = false, showNotifications = false, sho
                 )}
             </View>
 
-            <ThemedText style={styles.title}>{title}</ThemedText>
+            <ThemedText style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</ThemedText>
 
             <View style={[styles.side, styles.sideRight]}>
                 {showNotifications && (
