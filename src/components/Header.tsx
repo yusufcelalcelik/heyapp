@@ -6,15 +6,22 @@ import { router } from 'expo-router';
 
 type HeaderProps = {
     title?: string;
+    showBack?: boolean;
     showNotifications?: boolean;
     showSettings?: boolean;
     showAddButton?: boolean;
 };
-export function Header({ title, showNotifications = false, showSettings = false, showAddButton = false }: HeaderProps) {
+export function Header({ title, showBack = false, showNotifications = false, showSettings = false, showAddButton = false }: HeaderProps) {
     const theme = useTheme();
 
     return (
         <View style={styles.container}>
+            {showBack && (
+                <Pressable onPress={() => router.back()}>
+                    <Ionicons name="chevron-back" size={24} color={theme.text} />
+                </Pressable>
+            )}
+
             <View style={styles.side}>
                 {showAddButton && (
                     <Pressable>
