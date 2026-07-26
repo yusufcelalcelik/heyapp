@@ -11,7 +11,7 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <SafeAreaProvider>
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
           <RootNavigator />
         </SafeAreaView>
       </SafeAreaProvider>
