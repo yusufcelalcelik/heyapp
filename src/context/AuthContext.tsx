@@ -25,8 +25,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [isLogged, setIsLogged] = useState(false);
     const [user, setUser] = useState<UserData | null>(null);
     const logout = () => {
-        setIsLogged(false);
         setUser(null);
+        setIsLogged(false);
     };
 
     return <AuthContext.Provider value={{ isLogged, setIsLogged, user, setUser, logout }}>{children}</AuthContext.Provider>

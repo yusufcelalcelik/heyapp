@@ -39,7 +39,7 @@ export function Header({ title, showBack = false, showNotifications = false, sho
                     </Pressable>
                 )}
                 {showSettings && (
-                    <Pressable onPress={() => router.replace("/settings")}>
+                    <Pressable onPress={() => router.push("/settings")}>
                         <Ionicons name="settings-outline" size={24} color={theme.text} />
                     </Pressable>
 
