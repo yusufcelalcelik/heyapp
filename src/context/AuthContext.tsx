@@ -5,6 +5,7 @@ type AuthContextType = {
     setIsLogged: (value: boolean) => void;
     user: UserData | null;
     setUser: (user: UserData | null) => void;
+    logout: () => void;
 };
 
 type UserData = {
@@ -20,11 +21,15 @@ type UserData = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-
+    
     const [isLogged, setIsLogged] = useState(false);
     const [user, setUser] = useState<UserData | null>(null);
+    const logout = () => {
+        setIsLogged(false);
+        setUser(null);
+    };
 
-    return <AuthContext.Provider value={{ isLogged, setIsLogged, user, setUser }}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{ isLogged, setIsLogged, user, setUser, logout }}>{children}</AuthContext.Provider>
 
 }
 
