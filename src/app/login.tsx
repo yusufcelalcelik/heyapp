@@ -27,7 +27,7 @@ export default function Login() {
                 username,
                 post: response.post,
                 follow: response.follow,
-                follower: response.follower,
+                follower: response.followers,
                 bio: response.bio
             })
 
