@@ -25,14 +25,14 @@ function RootNavigator() {
 
   return (
     <>
+      {/* (app) grubundaki tüm alt sayfalar otomatik korunur */}
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Protected guard={isLogged}>
-          <Stack.Screen name="(app)" />   {/* tüm alt sayfalar otomatik korunur */}
+          <Stack.Screen name="(app)" />
         </Stack.Protected>
         <Stack.Protected guard={!isLogged}>
           <Stack.Screen name="login" />
         </Stack.Protected>
-
       </Stack>
       <AnimatedSplashOverlay />
     </>
