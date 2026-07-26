@@ -3,13 +3,16 @@ import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useColorScheme } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 SplashScreen.preventAutoHideAsync();
 
 
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <RootNavigator />
+      <SafeAreaView>
+        <RootNavigator />
+      </SafeAreaView>
     </AuthProvider>
   );
 }

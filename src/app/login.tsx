@@ -7,7 +7,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Login() {
     const theme = useTheme();
@@ -42,7 +41,7 @@ export default function Login() {
 
     }
     return (
-        <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.background }]}>
+        <View style={[styles.safeArea, { backgroundColor: theme.background }]}>
             {/* Login Card */}
 
             <View style={styles.card}>
@@ -87,7 +86,7 @@ export default function Login() {
 
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 
 }

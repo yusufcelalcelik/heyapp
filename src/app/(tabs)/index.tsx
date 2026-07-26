@@ -1,15 +1,14 @@
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, View } from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/Header';
 
 export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea} >
+      <View style={styles.safeArea} >
         <Header title="Ana Sayfa" showNotifications showAddButton />
 
-      </SafeAreaView>
+      </View>
 
     </ThemedView>
   );

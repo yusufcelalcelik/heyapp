@@ -3,7 +3,6 @@ import { useTheme } from '@/hooks/use-theme';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '@/components/Header';
 import { useAuth } from '@/context/AuthContext';
 
@@ -20,7 +19,7 @@ export default function ProfileScreen() {
     const theme = useTheme();
     const { user } = useAuth()
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
+        <View style={{ flex: 1, backgroundColor: theme.background }}>
             {/* buraya devam edeceğiz */}
             {/* buraya header bileşeni eklenecek */}
             <Header title={user?.username} showSettings />
@@ -71,7 +70,7 @@ export default function ProfileScreen() {
             <View style={styles.bioContainer}>
                 <Text>{user?.bio}</Text>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 
