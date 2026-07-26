@@ -1,11 +1,11 @@
-import { Pressable, View, Text,Alert } from "react-native";
+import { Pressable, Alert } from "react-native";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
-import { useTheme } from '@/hooks/use-theme';
+import { ThemedView } from "@/components/themed-view";
+import { ThemedText } from "@/components/themed-text";
 
 export default function Settings() {
     const { logout } = useAuth();
-    const theme = useTheme();
 
     const handleLogout = () => {
         Alert.alert(
@@ -27,11 +27,11 @@ export default function Settings() {
     };
 
     return (
-        <View>
-            <Header showBack={true} />
+        <ThemedView style={{ flex: 1 }}>
+            <Header showBack={true} title={"Ayarlar"}/>
             <Pressable onPress={handleLogout}>
-                <Text>ÇIKIŞ YAP</Text>
+                <ThemedText>ÇIKIŞ YAP</ThemedText>
             </Pressable>
-        </View>
+        </ThemedView>
     );
 }
