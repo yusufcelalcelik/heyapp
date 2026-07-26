@@ -2,6 +2,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Spacing } from '@/constants/theme';
+import { router } from 'expo-router';
 
 type HeaderProps = {
     title?: string;
@@ -31,9 +32,10 @@ export function Header({ title, showNotifications = false, showSettings = false,
                     </Pressable>
                 )}
                 {showSettings && (
-                    <Pressable>
+                    <Pressable onPress={() => router.replace("/settings")}>
                         <Ionicons name="settings-outline" size={24} color={theme.text} />
                     </Pressable>
+
                 )}
             </View>
         </View>
