@@ -2,7 +2,6 @@
   "expo": {
     "name": "heyapp",
     "slug": "heyapp",
-    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "heyapp",
