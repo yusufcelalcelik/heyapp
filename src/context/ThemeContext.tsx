@@ -1,8 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-
-// Tip tanımlamaları 
+// Tip tanımlamaları
 type ThemeContextType = {
     themeMode: ThemeMode;
     setThemeMode: (mode: ThemeMode) => void;
@@ -10,7 +9,7 @@ type ThemeContextType = {
 };
 
 const VALID_MODES = ['light', 'dark', 'system'] as const;
-type ThemeMode = typeof VALID_MODES[number]
+export type ThemeMode = typeof VALID_MODES[number]
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -28,8 +27,7 @@ export function ThemeModeProvider({ children }: { children: ReactNode }) {
             }
         });
 
-    }
-    )
+    }, [])
 
     // buraya setThemeMode fonksiyonu gelecek (adım 4)
     const setThemeMode = (mode: ThemeMode) => {
@@ -46,10 +44,10 @@ export function ThemeModeProvider({ children }: { children: ReactNode }) {
     return <ThemeContext.Provider value={{ themeMode, setThemeMode, resolvedTheme }}>{children}</ThemeContext.Provider>;
 }
 
-export function useTheme() {
+export function useThemeMode() {
     const context = useContext(ThemeContext)
 
-    if (context == null) throw new Error("useTheme, ThemeProvider içinde kullanılmalı");
+    if (context == null) throw new Error("useThemeMode, ThemeModeProvider içinde kullanılmalı");
 
     return context;
 

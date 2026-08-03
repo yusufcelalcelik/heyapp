@@ -4,8 +4,5 @@ const pkg = require("./package.json");
 // version alanı burada package.json'dan okunur, iki dosya arasında elle senkron gerekmez.
 module.exports = ({ config }) => ({
   ...config,
-  expo: {
-    ...config.expo,
-    version: pkg.version,
-  },
+  version: pkg.version,
 });

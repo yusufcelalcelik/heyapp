@@ -1,15 +1,13 @@
 import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useThemeMode } from '@/context/ThemeContext';
 
 /**
- * Cihazın açık/koyu mod ayarına göre doğru renk paletini (Colors.light / Colors.dark) döndürür.
- * Bileşenlerde theme.text, theme.background gibi alanlara erişmek için kullanılır.
- * Detay: https://docs.expo.dev/guides/color-schemes/
+ * Kullanıcının ThemeContext'te seçtiği moda (light/dark/system) göre doğru renk paletini
+ * (Colors.light / Colors.dark) döndürür. Bileşenlerde theme.text, theme.background gibi
+ * alanlara erişmek için kullanılır.
  */
 export function useTheme() {
-  const scheme = useColorScheme();
-  // useColorScheme bazı platformlarda 'unspecified' dönebilir, bu durumda light'a düşüyoruz.
-  const theme = scheme === 'unspecified' ? 'light' : scheme;
+  const { resolvedTheme } = useThemeMode();
 
-  return Colors[theme];
+  return Colors[resolvedTheme];
 }

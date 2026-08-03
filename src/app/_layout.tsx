@@ -1,7 +1,10 @@
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { ThemeModeProvider } from '@/context/ThemeContext';
+import { useTheme } from '@/hooks/use-theme';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 // Splash screen'in otomatik kapanmasını engelliyoruz; AnimatedSplashOverlay layout hazır olunca
@@ -15,13 +18,26 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <RootNavigator />
-        </SafeAreaView>
-      </SafeAreaProvider>
+      <ThemeModeProvider>
+        <SafeAreaProvider>
+          <ThemedSafeArea>
+            <RootNavigator />
+          </ThemedSafeArea>
+        </SafeAreaProvider>
+      </ThemeModeProvider>
     </AuthProvider>
   );
+}
+
+/**
+ * SafeAreaView'ın kendisi (çentik/durum çubuğu ve home indicator alanları dahil) aktif temanın
+ * arka plan rengini kullansın diye eklendi. useTheme, ThemeModeProvider'ın altında çağrılmak
+ * zorunda olduğu için bu mantık RootLayout'tan ayrı bir component'e alındı.
+ */
+function ThemedSafeArea({ children }: { children: ReactNode }) {
+  const theme = useTheme();
+
+  return <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>{children}</SafeAreaView>;
 }
 
 /**
